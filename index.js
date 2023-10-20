@@ -9,8 +9,6 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json())
 
-// trigunxr
-// 2IFXHL2KAlg3G7XK
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
