@@ -46,9 +46,7 @@ async function run() {
 
         app.get('/display/:brand', async (req, res) => {
             const brand = req.params.brand;
-            
-            const query = {brand_name: brand };
-
+            const query = { brand_name: brand };
             const result = await carsDB.find(query).toArray();
             res.send(result);
         })
@@ -77,10 +75,25 @@ async function run() {
             res.send(result)
         })
 
-        // userCart ============       
+        // userCart ============  
+        app.get('/cart/:email', async (req, res) => {
+            const userEmail = req.params.email;
+            const query = { userEmail: userEmail };
+            const result = await userCart.find(query).toArray();
+            res.send(result);
+        })     
+
+
         app.post('/addtocart', async (req, res) => {
-            const cart= req.body;
+            const cart = req.body;
             const result = await userCart.insertOne(cart);
+            res.send(result);
+        })
+
+        app.delete('/cart/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await userCart.deleteOne(query);
             res.send(result);
         })
 
