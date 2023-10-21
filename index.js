@@ -28,13 +28,16 @@ async function run() {
 
         const brandDB = client.db("trigun-db").collection("brandDB");
         const carsDB = client.db("trigun-db").collection("carsDB");
+        const userCart = client.db("trigun-db").collection("userCart");
 
+        // brandDB ===============
         app.get('/brands', async (req, res) => {
             const cursor = brandDB.find();
             const result = await cursor.toArray();
             res.send(result)
         })
 
+        // carsDB ==================
         app.get('/display', async (req, res) => {
             const cursor = carsDB.find();
             const result = await cursor.toArray();
@@ -60,6 +63,13 @@ async function run() {
         app.post('/cardata', async (req, res) => {
             const carData = req.body;
             const result = await carsDB.insertOne(carData);
+            res.send(result);
+        })
+
+        // userCart ============       
+        app.post('/addtocart', async (req, res) => {
+            const cart= req.body;
+            const result = await userCart.insertOne(cart);
             res.send(result);
         })
 
