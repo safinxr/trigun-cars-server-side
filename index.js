@@ -1,13 +1,15 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
 require('dotenv').config()
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
 // Middleware
 app.use(cors());
 app.use(express.json())
+
+
 
 
 
@@ -23,7 +25,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
     try {
-        await client.connect();
+        // await client.connect();
 
 
         const brandDB = client.db("trigun-db").collection("brandDB");
@@ -99,7 +101,7 @@ async function run() {
 
 
 
-        await client.db("admin").command({ ping: 1 });
+
         console.log("✅✅✅✅ connected to MongoDB! ✅✅✅✅");
     } finally {
         // await client.close();
