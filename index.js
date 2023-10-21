@@ -66,6 +66,17 @@ async function run() {
             res.send(result);
         })
 
+        app.put('/cardata/:id', async (req, res) => {
+            const id = req.params.id;
+            const data = req.body;
+            const query = { _id: new ObjectId(id) };
+            const updatedData = {
+                $set: data
+            }
+            const result = await carsDB.updateOne(query, updatedData)
+            res.send(result)
+        })
+
         // userCart ============       
         app.post('/addtocart', async (req, res) => {
             const cart= req.body;
